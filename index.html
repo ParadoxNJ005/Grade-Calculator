@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+    body{
+        height:100vh;
+        width:100%;
+        display: flex;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.916),rgba(0, 0, 0, 0.509)),url(' yo.jpeg') ;
+        font-family: 'Poppins', sans-serif;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+    }
+    .container{
+        width:700px;
+        border-radius: 15px;
+        color:#ff004f;
+        flex-wrap: wrap;
+        display: flex;
+        background-color:transparent; 
+        box-shadow: 8px 8px 20px rgb(231, 162, 162);
+        border: solid white;
+        border-radius: 20px;
+    }
+    .left{
+        padding:60px 20px;
+        width:50%;
+        height:100%;
+        display: flex;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        flex-direction: column;
+        min-width:200px;
+        align-items: center;
+        justify-content: center;
+    }
+    h1{
+        padding:10px;
+        font-size: 2rem;
+    }
+    p{
+        padding:5px;
+        font-size: 1.25rem;
+    }
+    text{
+        font-size: 2.5rem;
+        padding:15px;
+        font-weight: bold;
+        color: #219ebc;
+    }
+    .right{
+        padding:60px 20px;
+        height:100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-left:2px solid #8ecae6;
+        gap:20px;
+        background-color: #023047;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        width:50%;
+        min-width:200px;
+    }
+    input{
+        padding:10px;
+        font-size: 1rem;
+        background-color: transparent;
+        outline: none;
+        color:white;
+        border:none;
+        border-bottom: 2px solid #8ecae6;
+    }
+    input::placeholder{
+        color:white;
+    }
+    input[type=submit]{
+        padding:20px 40px;
+        border: 2px solid #8ecae6;
+        color:white;
+        cursor:pointer;
+        border-radius: 10px;
+    }
+
+    .container :hover{
+        transition:  background 0.5s , transform 0.5s;
+        color: bisque;
+    }
+
+</style>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>Grade Calculator</h1>
+            <p>Your Marks %</p>
+            <text id="percent"></text>
+            <p>Your Grade</p>
+            <text id="grade"></text>
+        </div>
+        <div class="right">
+            <div>
+                <label></label>
+                <input type="text" placeholder="D.M.S" id="dms">
+            </div>
+            <div>
+                <label></label>
+                <input type="text" placeholder="C.O.A" id="coa">
+            </div>
+            <div>
+                <label></label>
+                <input type="text" placeholder="Web D" id="web">
+            </div>
+            <div>
+                <label></label>
+                <input type="text" placeholder="D.S.A" id="dsa">
+            </div>
+            <div>
+                <label></label>
+                <input type="submit" value="Click" id="sub" onclick="calc()">
+            </div>
+        </div> 
+    </div>
+</body>
+<script>
+    function calc(){
+        let dms = parseInt(document.getElementById("dms").value);
+        let dsa = parseInt(document.getElementById("dsa").value);
+        let coa = parseInt(document.getElementById("coa").value);
+        let web = parseInt(document.getElementById("web").value);
+        let flag = true;
+        marks = [dms, coa, dsa, web];
+        console.log(marks);
+        const number = marks.map((e)=>{
+            if(e > 100 || e < 0){
+                alert("Enter marks between 0 and 100");
+                flag = false;
+            }
+            return e;
+        });
+        if(flag){
+            let sum = 0;
+            number.forEach(element => {
+                sum = sum + element;
+            });
+            console.log(sum);
+            let percentage = ((sum/(number.length*100))*100);
+            document.getElementById("percent").innerText = percentage + "%";
+            let grade;
+            if(percentage >= 90) grade = "A+";
+            else if(percentage >= 80) grade = "A";
+            else if(percentage >= 70) grade = "B+";
+            else if(percentage >= 60) grade = "B";
+            else if(percentage >= 50) grade = "C";
+            else if(percentage >= 40) grade = "D";
+            else grade = "Fail";
+
+            document.getElementById("grade").innerText = grade;
+        }
+    }
+</script>
+</html>
